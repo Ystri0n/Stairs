@@ -1,0 +1,12 @@
+# Composer
+/vendor/
+
+# PHP_CodeSniffer
+/phpcs.xml
+
+# PHPStan
+/phpstan.neon
+
+# PHPUnit
+/.phpunit.cache/
+/phpunit.xml

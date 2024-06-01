@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/PHPCSStandards/PHP_CodeSniffer/3.9.2/phpcs.xsd"
+         name="Stairs Coding Standard"
+         namespace="Stairs\CS\Standard">
+  <description>A collection of strict coding rules.</description>
+
+  <file>./src</file>
+  <file>./tests</file>
+
+  <arg name="extensions" value="php" />
+  <arg name="colors" />
+  <arg value="p" />
+
+  <rule ref="PSR12">
+    <exclude name="Generic.Files.LineLength" />
+  </rule>
+</ruleset>
