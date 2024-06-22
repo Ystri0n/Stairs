@@ -23,7 +23,7 @@ class RouterExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('absolute_url', $this->route(...)),
+            new TwigFunction('absolute_url', $this->absoluteUrl(...)),
             new TwigFunction('route', $this->route(...)),
         ];
     }
