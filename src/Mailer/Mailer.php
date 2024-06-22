@@ -39,6 +39,7 @@ class Mailer
         $phpmailer->Subject = $email->getSubject();
         $phpmailer->Body = $email->getBody();
 
+        $phpmailer->CharSet = PHPMailer::CHARSET_UTF8;
         $phpmailer->isHTML(true);
 
         $phpmailer->send();
