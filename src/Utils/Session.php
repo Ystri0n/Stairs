@@ -6,6 +6,8 @@ namespace Stairs\Utils;
 
 class Session
 {
+    protected bool $hasChanged = false;
+
     /** @var array<string, mixed> */
     protected array $data = [];
 
@@ -21,14 +23,23 @@ class Session
 
     public function set(string $key, mixed $value): void
     {
+        $this->hasChanged = true;
+
         $this->data[$key] = $value;
     }
 
     public function del(string $key): void
     {
         if ($this->has($key)) {
+            $this->hasChanged = true;
+
             unset($this->data[$key]);
         }
+    }
+
+    public function hasChanged(): bool
+    {
+        return $this->hasChanged;
     }
 
     /**

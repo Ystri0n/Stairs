@@ -14,14 +14,12 @@ use Stairs\Utils\Session;
 
 class SessionMiddleware implements MiddlewareInterface
 {
-    protected Cookie $cookie;
-
-    protected Session $session;
-
-    protected CacheItemPoolInterface $cache;
-
-    public function __construct(Cookie $cookie, Session $session, CacheItemPoolInterface $cache)
-    {
+    public function __construct(
+        protected Cookie $cookie,
+        protected Session $session,
+        protected CacheItemPoolInterface $cache,
+        protected int $expiresAfter = 10800,
+    ) {
         $this->cookie = $cookie;
         $this->session = $session;
         $this->cache = $cache;
@@ -47,9 +45,12 @@ class SessionMiddleware implements MiddlewareInterface
 
         $response = $handler->handle($request);
 
-        $item->set($this->session->getData());
+        if ($this->session->hasChanged()) {
+            $item->expiresAfter($this->expiresAfter);
+            $item->set($this->session->getData());
 
-        $this->cache->save($item);
+            $this->cache->save($item);
+        }
 
         return $response;
     }
